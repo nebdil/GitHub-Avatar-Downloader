@@ -18,12 +18,13 @@ function getRepoContributors(repoOwner, repoName, cb) {
     var parsedArr = JSON.parse(body);
     // console.log(parsedObj);
     cb(err, parsedArr);
+
   });
 }
 function downloadImageByURL(url, filePath) {
   request.get(url).on('error', function(err) {
     throw err;
-  }).pipe(fs.createWriteStream(filePath));
+  }).pipe(fs.createWriteStream('avatars/' + filePath + '.jpg'));
 };
 
 getRepoContributors("jquery", "jquery", function(err, result) {
@@ -31,5 +32,6 @@ getRepoContributors("jquery", "jquery", function(err, result) {
   console.log("Result:", result);
   result.forEach(function(e) {
     console.log(e.avatar_url);
+    downloadImageByURL(e.avatar_url, e.login);
   })
 });
