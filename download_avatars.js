@@ -29,10 +29,15 @@ function downloadImageByURL(url, filePath) {
 };
 
 getRepoContributors(inputOwner, inputRepo, function(err, result) {
-  console.log("Errors:", err);
-  console.log("Result:", result);
-  result.forEach(function(e) {
+  if((!inputOwner) || (!inputRepo)) {
+    console.log("Missing input");
+  }
+  else{
+    console.log("Errors:", err);
+    console.log("Result:", result);
+    result.forEach(function(e) {
     console.log(e.avatar_url);
     downloadImageByURL(e.avatar_url, e.login);
-  })
+  })}
+
 });
