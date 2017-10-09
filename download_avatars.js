@@ -3,7 +3,8 @@ var fs = require('fs');
 var GITHUB_USER = "nebdil";
 var GITHUB_TOKEN = "f22994992b965f0ee2fe38fd77c1cf62a5135ba6";
 console.log('Welcome to the GitHub Avatar Downloader!');
-
+var inputOwner = process.argv[2];
+var inputRepo = process.argv[3];
 function getRepoContributors(repoOwner, repoName, cb) {
   var requestURL = 'https://'+ GITHUB_USER + ':' + GITHUB_TOKEN + '@api.github.com/repos/' + repoOwner + '/' + repoName + '/contributors';
   var options = {
@@ -27,7 +28,7 @@ function downloadImageByURL(url, filePath) {
   }).pipe(fs.createWriteStream('avatars/' + filePath + '.jpg'));
 };
 
-getRepoContributors("jquery", "jquery", function(err, result) {
+getRepoContributors(inputOwner, inputRepo, function(err, result) {
   console.log("Errors:", err);
   console.log("Result:", result);
   result.forEach(function(e) {
