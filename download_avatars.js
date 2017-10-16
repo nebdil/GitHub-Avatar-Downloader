@@ -1,12 +1,13 @@
-var request = require('request');
-var fs = require('fs');
-var GITHUB_USER = "nebdil";
-var GITHUB_TOKEN = "f22994992b965f0ee2fe38fd77c1cf62a5135ba6";
+const request = require('request');
+const dotenv = require('dotenv').config();
+const fs = require('fs');
+const user = process.env.GITHUB_USER;
+const token = process.env.GITHUB_TOKEN;
 console.log('Welcome to the GitHub Avatar Downloader!');
 var inputOwner = process.argv[2];
 var inputRepo = process.argv[3];
 function getRepoContributors(repoOwner, repoName, cb) {
-  var requestURL = 'https://'+ GITHUB_USER + ':' + GITHUB_TOKEN + '@api.github.com/repos/' + repoOwner + '/' + repoName + '/contributors';
+  var requestURL = 'https://'+ user + ':' + token + '@api.github.com/repos/' + repoOwner + '/' + repoName + '/contributors';
   var options = {
     url: requestURL,
     headers: {
